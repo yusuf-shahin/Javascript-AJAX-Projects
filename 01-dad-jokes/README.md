@@ -49,6 +49,10 @@
 - set result.textContent = joke
 
 ```js
+const url = "https://icanhazdadjoke.com/";
+const wrongUrl = "https://icanhazdadjo.com/";
+const extenUrl = "https://icanhazdadjoke.com/fff";
+
 const fetchDadJoke = async () => {
   const response = await fetch(url, {
     headers: {
@@ -73,7 +77,38 @@ const fetchDadJoke = async () => {
 
 #### Check Status
 
-- Fetch - only throws an error if cannot resolve
-- Error response still a response
+- Fetch - only throws an error if it cannot be resolve. `const wrongUrl = "https://icanhazdadjo.com/"` in this code url is wrong. So using catch() browser derectly show error.
+- Error response still a response. If we fetch extenUrl `const extenUrl = "https://icanhazdadjoke.com/fff"` we also get response. But we must checkout that is that response true or false.
 - check response.ok property
 - throw new Error('Whoops!')
+
+##### The code is :-
+
+```js
+const fetchDadJoke = async () => {
+  result.innerHTML = `<h3 style="color: purple;">Loading...</h3>`;
+  try {
+    const resp = await fetch(extenUrl, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "learning app",
+      },
+    });
+    //* to see our resp status , is that ok:true or ok:false .
+    console.log(resp);
+    if (!resp.ok) {
+      throw new Error(" error");
+    }
+
+    const data = await resp.json();
+    // console.log(data);
+    result.textContent = data.joke;
+  } catch (error) {
+    //# If the url of API is wrong then it show this meessage...
+    // for example "https://icanhazdadjo.com/" this url is wrong
+    result.innerHTML = `<h3 style="color: brown;">There is no joke... :)</h3>`;
+  }
+};
+```
+
+- Moral of the story is , using fetch() we get a response. That response will resolve or reject. If response will be resolve we convert this respone into json file _response.json()_ to get the data.
