@@ -2,13 +2,13 @@ const url = "https://www.course-api.com/javascript-store-products";
 
 const productDOM = document.querySelector(".products-center");
 
-//? fetchData() --> fetch the Api and convert it to data, and hold that data as promise.
-
 const fetchData = async () => {
   try {
     productDOM.innerHTML = `<div class='loading'></div>`;
     const resp = await fetch(url);
+    console.log(resp);
     const data = await resp.json();
+    console.log(data);
     // console.log(data);
     // displayProducts(data);
     return data;
@@ -18,13 +18,14 @@ const fetchData = async () => {
   }
 };
 
+// fetchData();
+
 //* every async function return a promise
 const show = async () => {
   //* In console we see a promise ...
   // console.log(fetchData());
-  // const data = await fetchData();
-  // displayProducts(data);
-  console.log("hello world");
+  const data = await fetchData();
+  displayProducts(data);
 };
 
 //? Display all product :-
