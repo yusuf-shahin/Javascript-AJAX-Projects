@@ -15,6 +15,7 @@ const getElement = (selection) => {
   if (element) {
     return element;
   }
+  throw new Error("no element selected");
 };
 
 //* we can also export using that method...

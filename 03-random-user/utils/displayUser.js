@@ -10,9 +10,7 @@ const displayUser = (person) => {
   img.src = person.image;
   value.textContent = person.name;
   title.textContent = `My name is`;
-  btns.forEach((btn) => {
-    btn.classList.remove("active");
-  });
+  removeActive(btns);
   btns[0].classList.add("active");
   btns.forEach((btn) => {
     // console.log(btn);
@@ -21,12 +19,16 @@ const displayUser = (person) => {
       // console.log(person[label]);
       title.textContent = `My ${label} is`;
       value.textContent = person[label];
-      btns.forEach((btn) => {
-        btn.classList.remove("active");
-      });
+      removeActive(btns);
       btn.classList.add("active");
     });
   });
 };
+
+function removeActive(item) {
+  item.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+}
 
 export default displayUser;
